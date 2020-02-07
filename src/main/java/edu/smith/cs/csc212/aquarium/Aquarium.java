@@ -30,7 +30,7 @@ public class Aquarium extends GFX {
 	/**
 	 * Put a snail on the top of the tank.
 	 */
-	Snail algorithm = new Snail(177, Snail.HEIGHT + 1, "top");
+	Snail algorithm = new Snail(100, Snail.HEIGHT + 1, "top");
 
 	/**
 	 * This is a constructor, code that runs when we make a new Aquarium.
@@ -42,28 +42,42 @@ public class Aquarium extends GFX {
 	}
 
 	int fish1X = getWidth() + 100;
-	int fish2X = getWidth() + 300;
+	int fish2X = getWidth() - 300;
+	int fish3X = 100;
+	
+	Fish nemo = new Fish(Color.cyan, 250, 250, true);
+	Fish marlin = new Fish(Color.lightGray, 100, 100, false);
 
 	@Override
 	public void draw(Graphics2D g) {
 		// Draw the "ocean" background.
 		g.setColor(Color.blue);
 		g.fillRect(0, 0, getWidth(), getHeight());
+		
+		nemo.draw(g);
+		marlin.draw(g);
 
 		// Draw the fish!
 		DrawFish.facingLeft(g, Color.yellow, fish1X, 200);
-		// Draw the confused fish!
+		// swimming left
 		DrawFish.facingRight(g, Color.green, fish2X, 300);
 
-		// What if we wanted this little fish to swim, too?
-		DrawFish.smallFacingLeft(g, Color.red, 200, 100);
+		// fish moves to the right
+		DrawFish.smallFacingLeft(g, Color.red, fish3X, 400);
 
 		// Draw our snail!
 		algorithm.draw(g);
 
 		// Move the fish!
 		fish1X -= 1;
-		fish2X -= 2;
+		fish2X += 2;
+		fish3X -= 5;
+		//if (fish2X > getWidth) {
+			
+		//}
+		if (fish3X < 0) {
+			fish3X = +500;
+		}
 	}
 
 	public static void main(String[] args) {
